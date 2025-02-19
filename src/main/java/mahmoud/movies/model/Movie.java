@@ -1,6 +1,7 @@
 package mahmoud.movies.model;
 
 import jakarta.persistence.*;
+import mahmoud.movies.converter.StringListConverter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,13 @@ public class Movie {
     @Column(name = "trailer_link")
     private String trailerLink;
     private  String Poster;
+
+    @Convert(converter = StringListConverter.class)
+    @Column(columnDefinition = "TEXT") // Store as JSON string
+
     private List<String> genres;
+    @Convert(converter = StringListConverter.class)
+    @Column(columnDefinition = "TEXT") // Store as JSON string
     private List<String> backdrops;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL,fetch = FetchType.LAZY)

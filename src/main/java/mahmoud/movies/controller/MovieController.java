@@ -23,7 +23,7 @@ public class MovieController {
     MovieService movieService;
 
 
-    @GetMapping
+    @GetMapping("list")
     public ResponseEntity<List<Movie>> getAllMovies() {
         List<Movie> movies = movieService.getAllMovies();
 
