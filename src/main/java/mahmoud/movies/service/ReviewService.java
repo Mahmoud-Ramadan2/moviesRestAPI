@@ -16,6 +16,7 @@ public class ReviewService {
     private MovieService movieService;
 
     public Review createReview(String body, int movieId) {
+       // Movie movie = movieService.getSingleMovie(movieId);
         Movie movie = movieService.getSingleMovie(movieId);
         Review review = new Review(body);
         review.setMovie(movie);
