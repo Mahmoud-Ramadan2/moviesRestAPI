@@ -1,5 +1,7 @@
 package mahmoud.movies.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import mahmoud.movies.converter.StringListConverter;
 
@@ -20,7 +22,7 @@ public class Movie {
     private String releaseDate;
     @Column(name = "trailer_link")
     private String trailerLink;
-    private  String Poster;
+    private String Poster;
 
     @Convert(converter = StringListConverter.class)
     @Column(columnDefinition = "TEXT") // Store as JSON string
@@ -30,7 +32,9 @@ public class Movie {
     @Column(columnDefinition = "TEXT") // Store as JSON string
     private List<String> backdrops;
 
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //@JsonIgnore
+    @JsonManagedReference
     private List<Review> reviews;
 
 
@@ -118,9 +122,10 @@ public class Movie {
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
+
     // Convenience method
-    public void addReview(Review review){
-        if(reviews == null){
+    public void addReview(Review review) {
+        if (reviews == null) {
             reviews = new ArrayList<>();
         }
         reviews.add(review);
@@ -138,6 +143,7 @@ public class Movie {
                 ", Poster='" + Poster + '\'' +
                 ", genres=" + genres +
                 ", backdrops=" + backdrops +
+                ", reviews=" + reviews +
                 '}';
     }
 }

@@ -8,20 +8,27 @@ import mahmoud.movies.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ReviewService {
     @Autowired
     private ReviewRepository reviewRepository;
     @Autowired
-    private MovieService movieService;
+    private MovieRepository movieRepository ;
 
-    public Review createReview(String body, int movieId) {
+    public List<Review> getReviewsForMovie(int movieId) {
+
+        return reviewRepository.findByMovieId(movieId);
+    }
+
+        public Review createReview(String body, int movieId) {
        // Movie movie = movieService.getSingleMovie(movieId);
-        Movie movie = movieService.getSingleMovie(movieId);
+        Movie movie = movieRepository.findById(movieId)
+                .orElseThrow(()->new EntityNotFoundException(("Movie with id " + movieId + " not found")));
         Review review = new Review(body);
         review.setMovie(movie);
         return reviewRepository.save(review);
-
-
     }
 }

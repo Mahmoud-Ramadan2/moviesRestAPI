@@ -1,6 +1,7 @@
 package mahmoud.movies.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +13,7 @@ public class Review {
     private String body;
     @ManyToOne
     @JoinColumn(name = "movie_id")
+    @JsonBackReference
     Movie movie;
 
     public Review() {
