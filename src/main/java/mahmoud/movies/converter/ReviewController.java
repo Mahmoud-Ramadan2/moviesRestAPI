@@ -4,6 +4,7 @@ import mahmoud.movies.DTO.ReviewRequest;
 import mahmoud.movies.model.Review;
 import mahmoud.movies.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +20,13 @@ public class ReviewController {
     ReviewService reviewService;
 
     @GetMapping("/{movieId}")
-    public ResponseEntity<List<Review>> getReviewsForMovie(@PathVariable int movieId) {
+    public ResponseEntity<Page<Review>> getReviewsForMovie(
+            @PathVariable int movieId,
+            @RequestParam(defaultValue = "0" ) int page,
+            @RequestParam(defaultValue = "1") int size)
+    {
 
-        return ResponseEntity.ok(reviewService.getReviewsForMovie(movieId));
+        return ResponseEntity.ok(reviewService.getReviewsForMovie(movieId, page, size));
     }
 
     @PostMapping

@@ -6,6 +6,10 @@ import mahmoud.movies.model.Review;
 import mahmoud.movies.repository.MovieRepository;
 import mahmoud.movies.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -19,13 +23,14 @@ public class ReviewService {
     private ReviewRepository reviewRepository;
     @Autowired
     private MovieRepository movieRepository;
+    public Page<Review> getReviewsForMovie(int movieId, int page, int size) {
+        // no need to sort here
+//        List<Review> reviews = reviewRepository.findByMovieId(movieId);
+//               reviews.sort(Comparator.comparing(Review::getCreatedAt).reversed());
+        PageRequest pageable = PageRequest.of(page,size, Sort.by("createdAt").descending());
 
-    public List<Review> getReviewsForMovie(int movieId) {
+        return reviewRepository.findByMovieId(movieId, pageable);
 
-        List<Review> reviews = reviewRepository.findByMovieId(movieId);
-               reviews.sort(Comparator.comparing(Review::getCreatedAt).reversed());
-
-        return reviews;
     }
 
     public Review createReview(String body, int movieId) {
