@@ -4,6 +4,7 @@ import mahmoud.movies.DTO.ReviewRequest;
 import mahmoud.movies.model.Review;
 import mahmoud.movies.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -35,7 +36,11 @@ public class ReviewController {
         return ResponseEntity.created(location).body(createdReview);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Review> deleteReview(@PathVariable int id){
+    public ResponseEntity<String> deleteReview(@PathVariable int id){
+        reviewService.deleteReview(id);
+
+       // return ResponseEntity.ok("Review deleted successfully");
+       return new ResponseEntity<>("Review deleted successfully", HttpStatus.OK);
 
     }
 
