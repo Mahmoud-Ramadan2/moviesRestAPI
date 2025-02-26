@@ -33,6 +33,9 @@ public class ReviewController {
                 .toUri();
 
         return ResponseEntity.created(location).body(createdReview);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Review> deleteReview(@PathVariable int id){
 
     }
 

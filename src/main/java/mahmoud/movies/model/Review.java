@@ -4,13 +4,20 @@ package mahmoud.movies.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "reviews")
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String body;
+
+    @Column(name = "created_id")
+    private LocalDateTime createdAt;
+
     @ManyToOne
     @JoinColumn(name = "movie_id")
     @JsonBackReference
@@ -30,6 +37,16 @@ public class Review {
     public void setMovie(Movie movie) {
         this.movie = movie;
     }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    @PrePersist
+    public void setCreatedAt() {
+        this.createdAt = LocalDateTime.now();
+    }
+
 
     public String getBody() {
         return body;
