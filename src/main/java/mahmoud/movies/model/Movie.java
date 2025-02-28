@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import mahmoud.movies.converter.StringListConverter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class Movie {
     private String imdId;
     private String title;
     @Column(name = "release_date")
-    private String releaseDate;
+    private LocalDate releaseDate;
     @Column(name = "trailer_link")
     private String trailerLink;
     private String Poster;
@@ -41,7 +42,7 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(String imdId, String title, String releaseDate, String trailerLink, String poster, List<String> genres, List<String> backdrops) {
+    public Movie(String imdId, String title, LocalDate releaseDate, String trailerLink, String poster, List<String> genres, List<String> backdrops) {
         this.imdId = imdId;
         this.title = title;
         this.releaseDate = releaseDate;
@@ -75,11 +76,11 @@ public class Movie {
         this.title = title;
     }
 
-    public String getReleaseDate() {
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
+    public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
 

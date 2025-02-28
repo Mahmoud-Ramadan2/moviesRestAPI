@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.*;
 
 
@@ -39,6 +40,15 @@ public class MovieController {
     public ResponseEntity<Movie> fineMovieByImdId(@PathVariable String imdId) {
         return ResponseEntity.ok(movieService.fineMovieByImdId(imdId));
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Movie>> searchMovies(@RequestParam(required = false) String title,
+                                                    @RequestParam(required = false) LocalDate releaseDate){
+        return  ResponseEntity.ok(movieService.searchMovies(title,releaseDate));
+
+    }
+
+
 
     @PostMapping
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {

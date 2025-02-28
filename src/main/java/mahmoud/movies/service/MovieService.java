@@ -2,11 +2,11 @@ package mahmoud.movies.service;
 
 import mahmoud.movies.exception.EntityNotFoundException;
 import mahmoud.movies.model.Movie;
-import mahmoud.movies.model.Review;
 import mahmoud.movies.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +34,20 @@ public class MovieService {
                 .orElseThrow(()-> new EntityNotFoundException("Movie with imdId " + imdId + " not found"));
 
        }
-    public Movie addMovie(Movie movie) {
+    public List<Movie> searchMovies(String title, LocalDate releaseDate) {
+        if (title != null && !title.isEmpty()) {
+            return movieRepository.findByTitleContainingIgnoreCase(title);
+        } else if (releaseDate != null) {
+                return movieRepository.findByReleaseDate(releaseDate);
+        }
+            else{
+              return   movieRepository.findAll();
+            }
+
+        }
+
+
+        public Movie addMovie(Movie movie) {
         return movieRepository.save(movie);
     }
 
