@@ -1,4 +1,4 @@
-package mahmoud.movies.converter;
+package mahmoud.movies.controller;
 
 import mahmoud.movies.DTO.ReviewRequest;
 import mahmoud.movies.model.Review;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/reviews")

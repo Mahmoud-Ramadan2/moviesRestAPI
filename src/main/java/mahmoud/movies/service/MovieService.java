@@ -33,4 +33,18 @@ public class MovieService {
                 .orElseThrow(()-> new EntityNotFoundException("Movie with imdId " + imdId + " not found"));
 
        }
+    public Movie addMovie(Movie movie) {
+        return movieRepository.save(movie);
+    }
+
+    public Movie udateMovie(int id, Movie updateedMovie) {
+        //Movie movie = movieRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Movie with id " + id + " not found"));
+        Optional<Movie> result =  movieRepository.findById(id);
+        if(result.isPresent()){
+        return movieRepository.save(updateedMovie);
+        }else{
+            throw new EntityNotFoundException("Movie with id " + id + " not found");
+        }
+
+    }
 }

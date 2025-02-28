@@ -23,6 +23,13 @@ public class Review {
     @JsonBackReference
     Movie movie;
 
+
+// set date outo
+    @PrePersist
+    public void setCreatedAt() {
+        this.createdAt = LocalDateTime.now();
+    }
+
     public Review() {
     }
 
@@ -42,10 +49,6 @@ public class Review {
         return createdAt;
     }
 
-    @PrePersist
-    public void setCreatedAt() {
-        this.createdAt = LocalDateTime.now();
-    }
 
 
     public String getBody() {
