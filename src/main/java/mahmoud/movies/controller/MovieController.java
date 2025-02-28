@@ -51,5 +51,13 @@ public class MovieController {
 
         return ResponseEntity.ok(movieService.udateMovie(id, movie));
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteReview(@PathVariable int id){
+        movieService.deleteReview(id);
+
+        // return ResponseEntity.ok("Review deleted successfully");
+        return new ResponseEntity<>("Review deleted successfully", HttpStatus.OK);
+
+    }
 
 }

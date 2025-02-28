@@ -2,6 +2,7 @@ package mahmoud.movies.service;
 
 import mahmoud.movies.exception.EntityNotFoundException;
 import mahmoud.movies.model.Movie;
+import mahmoud.movies.model.Review;
 import mahmoud.movies.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,5 +47,12 @@ public class MovieService {
             throw new EntityNotFoundException("Movie with id " + id + " not found");
         }
 
+    }
+
+    public void deleteReview(int id) {
+
+        Movie movie = movieRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(("Movie with id " + id + " not found")));
+        movieRepository.delete(movie);
     }
 }
