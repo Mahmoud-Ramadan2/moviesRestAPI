@@ -14,7 +14,7 @@ import java.util.Optional;
 public class MovieService {
 
     @Autowired
-    MovieRepository movieRepository;
+    private MovieRepository movieRepository;
 
 
 
