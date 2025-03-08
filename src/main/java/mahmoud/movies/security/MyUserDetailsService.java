@@ -1,5 +1,6 @@
 package mahmoud.movies.security;
 
+import mahmoud.movies.model.Role;
 import mahmoud.movies.model.User;
 import mahmoud.movies.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class MyUserDetailsService implements UserDetailsService {
@@ -23,7 +24,10 @@ public class MyUserDetailsService implements UserDetailsService {
         User user = userService.FindUserByEmail(email);
         return new org.springframework.security.core.userdetails.User(
                 email, user.getPassword(),
-                Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+                user.getRoles().stream().map(r-> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toList())
+                );
 
     }
+
+
 }

@@ -7,9 +7,12 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 @Component
 public class JWTUtil {
@@ -20,10 +23,12 @@ public class JWTUtil {
     @Value("${jwt.expiration}")
     private  long expirationTime;
 
-    public String generateToken(String email) {
+    public String generateToken(String email, Collection<? extends GrantedAuthority> authorities) {
         return JWT.create()
                 .withSubject("User Details")
                 .withClaim("email", email)
+                .withClaim("roles", authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList())
+                )
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + expirationTime))
                 .withIssuer("movies/350")
