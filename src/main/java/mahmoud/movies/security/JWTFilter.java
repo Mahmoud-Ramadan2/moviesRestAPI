@@ -40,7 +40,7 @@ public class JWTFilter extends OncePerRequestFilter {
                     String email = jwtUtil.validateTokenAndRetrieveEmail(jwt);
                     UserDetails userDetails = userDetailsService.loadUserByUsername(email);
                     UsernamePasswordAuthenticationToken authToken =
-                            new UsernamePasswordAuthenticationToken(email, userDetails.getPassword(),
+                            new UsernamePasswordAuthenticationToken(email, null,
                                     userDetails.getAuthorities()); // no need the password once authentication is complete.
 
 

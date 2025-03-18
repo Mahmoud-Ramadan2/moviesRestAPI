@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -101,4 +102,5 @@ roles = new HashSet<>();
                 ", password='" + password + '\'' +
                 '}';
     }
+
 }

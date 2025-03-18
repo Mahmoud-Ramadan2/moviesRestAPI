@@ -8,6 +8,7 @@ import mahmoud.movies.converter.StringListConverter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "movies")
@@ -27,7 +28,6 @@ public class Movie {
 
     @Convert(converter = StringListConverter.class)
     @Column(columnDefinition = "TEXT") // Store as JSON string
-
     private List<String> genres;
     @Convert(converter = StringListConverter.class)
     @Column(columnDefinition = "TEXT") // Store as JSON string
@@ -131,6 +131,18 @@ public class Movie {
         }
         reviews.add(review);
         review.setMovie(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return id == movie.id && Objects.equals(imdId, movie.imdId) && Objects.equals(title, movie.title) && Objects.equals(releaseDate, movie.releaseDate) && Objects.equals(trailerLink, movie.trailerLink) && Objects.equals(Poster, movie.Poster) && Objects.equals(genres, movie.genres) && Objects.equals(backdrops, movie.backdrops) && Objects.equals(reviews, movie.reviews);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, imdId, title, releaseDate, trailerLink, Poster, genres, backdrops, reviews);
     }
 
     @Override

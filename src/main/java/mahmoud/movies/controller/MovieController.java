@@ -1,6 +1,8 @@
 package mahmoud.movies.controller;
 
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.websocket.server.PathParam;
 import mahmoud.movies.model.Movie;
 import mahmoud.movies.service.MovieService;
@@ -13,6 +15,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 
+@Tag(name = "Movie APi.", description = "Operations related to Movies.")
 @RestController
 @RequestMapping("api/movies")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -30,6 +33,7 @@ public class MovieController {
     }
 
 
+    @Operation(summary = "Get a Movie by ID", description = "Fetch Movie details by Movie ID")
     @GetMapping("/{id}")
     public ResponseEntity<Movie> getSingleMovie(@PathVariable int id) {
         return ResponseEntity.ok(movieService.getSingleMovie(id)); // Automatically handled by @RestControllerAdvice

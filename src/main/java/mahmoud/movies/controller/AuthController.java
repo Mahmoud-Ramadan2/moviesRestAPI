@@ -53,7 +53,8 @@ public class AuthController {
     public ResponseEntity<Map<String, String>> loginHandler(@RequestBody LoginCredentials body) {
         try {
 
-            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(body.getEmail(), body.getPassword());
+            UsernamePasswordAuthenticationToken authToken =  new UsernamePasswordAuthenticationToken(body.getEmail(), body.getPassword());
+
             //authManager.authenticate(authToken);
             Authentication authentication = authManager.authenticate(authToken);
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
