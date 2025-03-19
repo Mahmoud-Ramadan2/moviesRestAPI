@@ -34,9 +34,9 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(
                         c -> c
-                              .requestMatchers("/api/auth/**").permitAll()
-                                .requestMatchers(HttpMethod.GET,"/api/movies/**").hasRole("USER")
-                            //    .anyRequest().permitAll()
+                           //   .requestMatchers("/api/auth/**").permitAll()
+                             //   .requestMatchers(HttpMethod.GET,"/api/movies/**").hasRole("USER")
+                                .anyRequest().permitAll()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
