@@ -12,7 +12,7 @@ A **Movie Review REST API** built with **Java Spring Boot & MySQL** that allows 
 - **Data Transfer Objects (DTOs)** for clean data handling between layers.
 - **Swagger UI for live API testing**
 - **Postman Collection for manual testing**
-
+  mêmes
 
   
 ## ًں“– API Documentation
